@@ -3,16 +3,15 @@ package com.magellan_rewards_android;
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment;
-import dev.hotwire.turbo.BuildConfig
 import dev.hotwire.turbo.config.TurboPathConfiguration
 import dev.hotwire.turbo.session.TurboSessionNavHostFragment
 import kotlin.reflect.KClass
 
 
 class MainSessionNavHostFragment : TurboSessionNavHostFragment() {
-        override val sessionName = "main"
+        override val sessionName = SESSION_NAME
 
-        override val startLocation = "https://3d8547b6269a.ngrok.app/"
+        override val startLocation = BASE_URL
 
         override val registeredActivities: List<KClass<out AppCompatActivity>>
         get() = listOf(
@@ -39,8 +38,8 @@ class MainSessionNavHostFragment : TurboSessionNavHostFragment() {
 
         private fun customUserAgent(webView: WebView): String {
                 return listOf(
-                        "MagellanRewardsMobile",
-//                        "version: ${BuildConfig.VERSION_NAME}",
+                        CUSTOM_USER_AGENT,
+                        "version: $VERSION_NUMBER",
                         "baseUA: ${webView.settings.userAgentString}"
                 ).joinToString(separator = " | ")
         }
